@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resume</title>
+<style>
+  :root{
+    --navy:#16213e;
+    --blue:#1f4e8c;
+    --lightblue:#2e6db4;
+    --text:#2b2b2b;
+    --gray:#4a4a4a;
+    --tagbg:#e9edf5;
+    --line:#c9cfda;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:0;
+    background:#e8e8e8;
+    font-family:'Segoe UI', Arial, sans-serif;
+    color:var(--text);
+  }
+  .page{
+    max-width:1024px;
+    margin:20px auto;
+    background:#fff;
+    border:14px solid var(--navy);
+    padding:40px 45px;
+  }
+  header{
+    margin-bottom:18px;
+  }
+  h1.name{
+    font-size:54px;
+    letter-spacing:2px;
+    margin:0;
+    color:#111;
+    font-weight:800;
+  }
+  .role{
+    color:var(--blue);
+    font-size:22px;
+    font-weight:600;
+    margin:4px 0 14px 0;
+  }
+  .contact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    font-size:14px;
+    color:var(--gray);
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .contact-row span{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    white-space:nowrap;
+  }
+  .icon{
+    width:16px;
+    height:16px;
+    fill:var(--blue);
+    flex-shrink:0;
+  }
+  .content{
+    display:flex;
+    gap:35px;
+    margin-top:22px;
+  }
+  .left-col{
+    width:33%;
+  }
+  .right-col{
+    width:67%;
+    border-left:1px solid var(--line);
+    padding-left:35px;
+  }
+  .section{
+    margin-bottom:22px;
+  }
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .badge{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:var(--navy);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .badge svg{
+    width:18px;
+    height:18px;
+    fill:#fff;
+  }
+  .section-title h2{
+    font-size:17px;
+    letter-spacing:1px;
+    color:var(--navy);
+    margin:0;
+    font-weight:800;
+    text-transform:uppercase;
+  }
+  .section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+    margin-left:6px;
+  }
+  p.summary{
+    font-size:14px;
+    line-height:1.6;
+    color:var(--text);
+    margin:0;
+  }
+  .edu-block{
+    margin-bottom:10px;
+    padding-bottom:10px;
+    border-bottom:1px dotted var(--line);
+    font-size:13.5px;
+    line-height:1.55;
+  }
+  .edu-block:last-child{border-bottom:none;}
+  .edu-block .degree{
+    font-weight:700;
+    color:#111;
+  }
+  ul.skills{
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-size:13.5px;
+    line-height:1.5;
+  }
+  ul.skills li{
+    margin-bottom:10px;
+  }
+  ul.skills li b{
+    display:block;
+    color:#111;
+  }
+  ul.certs{
+    margin:0;
+    padding-left:18px;
+    font-size:13.5px;
+    line-height:1.7;
+  }
+  .project, .job{
+    margin-bottom:16px;
+    padding-bottom:14px;
+    border-bottom:1px dashed var(--line);
+  }
+  .project:last-child, .job:last-child{border-bottom:none;}
+  .project-head, .job-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .project-head .title, .job-head .title{
+    font-weight:700;
+    font-size:15px;
+    color:#111;
+  }
+  .project-head .title::before{
+    content:"● ";
+    color:var(--blue);
+    font-size:11px;
+  }
+  .date{
+    font-size:13px;
+    color:var(--gray);
+    white-space:nowrap;
+  }
+  .stack{
+    color:var(--lightblue);
+    font-style:italic;
+    font-size:13.5px;
+    margin:2px 0 6px 0;
+  }
+  .project ul, .job ul{
+    margin:0;
+    padding-left:20px;
+    font-size:13.5px;
+    line-height:1.6;
+  }
+  .job-head .title{
+    font-size:14.5px;
+  }
+  .job-sub{
+    font-size:13.5px;
+    color:var(--gray);
+    margin-bottom:6px;
+  }
+  ul.plain{
+    margin:0;
+    padding-left:20px;
+    font-size:13.5px;
+    line-height:1.7;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .tag{
+    background:var(--tagbg);
+    color:var(--navy);
+    font-size:12.5px;
+    font-weight:600;
+    padding:7px 14px;
+    border-radius:4px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1 class="name">YOUR NAME</h1>
+    <div class="role">Computer Science Student</div>
+    <div class="contact-row">
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+        +91 98765 43210
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M2 5c0-.6.4-1 1-1h18c.6 0 1 .4 1 1v14c0 .6-.4 1-1 1H3c-.6 0-1-.4-1-1V5zm2.4.5L12 11l7.6-5.5H4.4zM4 8v10h16V8l-8 5.8L4 8z"/></svg>
+        youremail@gmail.com
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.7c0-1.36-.03-3.1-1.9-3.1-1.9 0-2.2 1.48-2.2 3v5.8h-4V9z"/></svg>
+        linkedin.com/in/yourname
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.28 9.28 0 015 0c1.9-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        github.com/yourname
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 10.7a2.7 2.7 0 110-5.4 2.7 2.7 0 010 5.4z"/></svg>
+        City, State
+      </span>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <div class="left-col">
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4.4 0-8 2.2-8 5v3h16v-3c0-2.8-3.6-5-8-5z"/></svg></div>
+          <h2>Professional Summary</h2>
+        </div>
+        <p class="summary">Motivated and detail-oriented Computer Science student with strong foundation in programming, problem solving and web development. Seeking an opportunity to apply my skills and learn in a challenging environment while contributing to the organization's growth.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 3L1 8l11 5 9-4.1V17h2V8L12 3zM5 13.2V17c0 2.2 3.1 4 7 4s7-1.8 7-4v-3.8l-7 3.2-7-3.2z"/></svg></div>
+          <h2>Education</h2>
+        </div>
+        <div class="edu-block">
+          <div class="degree">Bachelor of Technology in Computer Science and Engineering</div>
+          ABC University, City, State<br>
+          2022 – 2026<br>
+          CGPA: 8.65 / 10.0
+        </div>
+        <div class="edu-block">
+          <div class="degree">Higher Secondary (12th)</div>
+          XYZ School, City, State<br>
+          2021<br>
+          Percentage: 92.6%
+        </div>
+        <div class="edu-block">
+          <div class="degree">Secondary (10th)</div>
+          XYZ School, City, State<br>
+          2019<br>
+          Percentage: 93.4%
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.6 7.6 0 000-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 00-1.7-1L14.9 3h-4l-.4 2.9a7.6 7.6 0 00-1.7 1l-2.5-1-2 3.5L6.4 11a7.6 7.6 0 000 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.75 1.7 1l.4 2.9h4l.4-2.9a7.6 7.6 0 001.7-1l2.5 1 2-3.5-2.1-1.6zM12 15.5A3.5 3.5 0 1112 8.5a3.5 3.5 0 010 7z"/></svg></div>
+          <h2>Technical Skills</h2>
+        </div>
+        <ul class="skills">
+          <li><b>Programming Languages:</b> Java, Python, C, C++</li>
+          <li><b>Web Technologies:</b> HTML, CSS, JavaScript, Bootstrap</li>
+          <li><b>Database:</b> MySQL, SQLite</li>
+          <li><b>Tools &amp; Technologies:</b> Git, GitHub, VS Code, Eclipse</li>
+          <li><b>Other Skills:</b> Data Structures &amp; Algorithms, OOPs, DBMS, OS</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.6 5.6L21 8.3l-4.5 4.1L17.8 19 12 15.9 6.2 19l1.3-6.6L3 8.3l6.4-.7L12 2z"/></svg></div>
+          <h2>Certifications</h2>
+        </div>
+        <ul class="certs">
+          <li>Java Programming – NPTEL (2024)</li>
+          <li>Database Management System – Great Learning (2023)</li>
+          <li>Cyber Security Essentials – Cisco (2023)</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="right-col">
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M10 4a2 2 0 00-2 2H4a2 2 0 00-2 2v2h20V8a2 2 0 00-2-2h-4a2 2 0 00-2-2h-4zm10 8H2v6a2 2 0 002 2h16a2 2 0 002-2v-6z"/></svg></div>
+          <h2>Projects</h2>
+        </div>
+
+        <div class="project">
+          <div class="project-head">
+            <span class="title">Student Management System</span>
+            <span class="date">Jan 2024</span>
+          </div>
+          <div class="stack">Java, MySQL, Swing</div>
+          <ul>
+            <li>Developed a desktop application to manage student records efficiently.</li>
+            <li>Implemented features such as Add, Update, Delete, Search and View records.</li>
+            <li>Connected MySQL database for storing and retrieving data securely.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <div class="project-head">
+            <span class="title">Personal Portfolio Website</span>
+            <span class="date">Oct 2023</span>
+          </div>
+          <div class="stack">HTML, CSS, JavaScript</div>
+          <ul>
+            <li>Designed and developed a responsive personal portfolio website.</li>
+            <li>Showcased skills, projects and certifications with clean UI/UX.</li>
+            <li>Deployed the website using GitHub Pages.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <div class="project-head">
+            <span class="title">Expense Tracker</span>
+            <span class="date">Aug 2023</span>
+          </div>
+          <div class="stack">Python, SQLite, Tkinter</div>
+          <ul>
+            <li>Built a GUI application to track daily expenses and generate reports.</li>
+            <li>Implemented data visualization using charts for better insights.</li>
+            <li>Used SQLite for efficient data storage.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M10 4a2 2 0 00-2 2H4a2 2 0 00-2 2v2h20V8a2 2 0 00-2-2h-4a2 2 0 00-2-2h-4zm10 8H2v6a2 2 0 002 2h16a2 2 0 002-2v-6z"/></svg></div>
+          <h2>Internship / Experience</h2>
+        </div>
+        <div class="job">
+          <div class="job-head">
+            <span class="title">Web Development Intern | CodSoft</span>
+            <span class="date">June 2024 – July 2024</span>
+          </div>
+          <ul>
+            <li>Developed and maintained responsive web pages using HTML, CSS and JavaScript.</li>
+            <li>Collaborated with the team to improve UI/UX and fix bugs.</li>
+            <li>Gained hands-on experience in front-end development and Git workflow.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 17.3l-5.5 3.2 1.5-6.2L3 10.1l6.3-.5L12 3.8l2.7 5.8 6.3.5-5 4.2 1.5 6.2z"/></svg></div>
+          <h2>Achievements / Activities</h2>
+        </div>
+        <ul class="plain">
+          <li>Participated in Smart India Hackathon 2023.</li>
+          <li>Won 2nd Prize in College Code-O-Mania (2023).</li>
+          <li>Active member of Coding Club, ABC University.</li>
+          <li>Volunteered in organizing technical workshops and seminars.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="badge"><svg viewBox="0 0 24 24"><path d="M4 4h9a3 3 0 013 3v13H7a3 3 0 01-3-3V4zm16 0h-2v16h2a2 2 0 002-2V6a2 2 0 00-2-2z"/></svg></div>
+          <h2>Relevant Coursework</h2>
+        </div>
+        <div class="tags">
+          <span class="tag">Data Structures &amp; Algorithms</span>
+          <span class="tag">Database Management Systems</span>
+          <span class="tag">Operating Systems</span>
+          <span class="tag">Computer Networks</span>
+          <span class="tag">Object Oriented Programming</span>
+          <span class="tag">Cryptography &amp; Security</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
